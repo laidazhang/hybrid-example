@@ -17,6 +17,17 @@ public class UserListResponse {
     @XmlElement(name = "user")
     private List<UserResponse> userResponseList;
 
+    @XmlElement(name = "user_name")
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public List<UserResponse> getUserResponseList() {
         return userResponseList;
     }

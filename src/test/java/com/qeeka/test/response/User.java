@@ -1,34 +1,25 @@
 package com.qeeka.test.response;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
-import com.qeeka.test.util.CDATAAdapter;
-import org.eclipse.persistence.oxm.annotations.XmlCDATA;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Created by kimi.lai on 8/27/2015.
+ * Created by dellpc on 2015/8/27.
  */
-@XmlRootElement(name = "user")
-@XmlAccessorType(XmlAccessType.FIELD)
-public class UserResponse {
-    @XmlElement(name = "user_name")
-    @XmlCDATA
-    //@XmlJavaTypeAdapter(CDATAAdapter.class)
+@XStreamAlias("user")
+public class User implements Serializable {
+    @XStreamAlias("user_name")
     private String userName;
 
-    @XmlElement(name = "age")
+    @XStreamAlias("age")
     private int age;
 
-    @XmlElement(name = "sex")
+    @XStreamAlias("sex")
     private String sex;
 
-    @XmlElement(name = "birthday")
+    @XStreamAlias("birthday")
     private Date birthday;
 
     public String getUserName() {
