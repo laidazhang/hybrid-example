@@ -1,6 +1,8 @@
 package com.qeeka.test;
 
 import com.qeeka.domain.QueryParser;
+import com.qeeka.test.response.User1Response;
+import com.qeeka.test.response.UserListResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +14,9 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 /**
  * Created by Neal on 2015/7/27.
@@ -55,5 +60,25 @@ public class AppTestConfig {
     @Bean
     public QueryParser queryParser() {
         return new QueryParser();
+    }
+
+    @Bean
+    public JAXBContext getJaxbContext() throws JAXBException {
+        return JAXBContext.newInstance(getXmlClasses());
+    }
+
+    private Class[] getXmlClasses() {
+        Class[] classes = {
+                UserListResponse.class,
+                User1Response.class
+        };
+        return classes;
+    }
+
+    @Bean
+    public Marshaller getMarshaller() throws JAXBException {
+        Marshaller jaxb2Marshaller = getJaxbContext().createMarshaller();
+        jaxb2Marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        return jaxb2Marshaller;
     }
 }
